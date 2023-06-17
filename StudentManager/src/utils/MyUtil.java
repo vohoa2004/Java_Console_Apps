@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  *
  * @author admin
  */
-public class MyUtils {
+public class MyUtil {
 
     public static Integer inputInteger(String message, int min, int max) {
         Scanner sc = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class MyUtils {
     public static final Pattern email = Pattern.compile("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$", Pattern.CASE_INSENSITIVE );
     
     public static boolean validateEmail(String email){
-         Matcher e = MyUtils.email.matcher(email);
+         Matcher e = MyUtil.email.matcher(email);
          return e.matches();
     }
     public static final Pattern phoneNumber = Pattern.compile("\\d{10}");
