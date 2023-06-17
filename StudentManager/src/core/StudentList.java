@@ -62,7 +62,7 @@ public class StudentList extends ArrayList<Student> {
         String studentID;
         do {
             studentID = MyUtil.inputString("Enter a studentID: ");
-        } while (MyUtil.validateID(studentID));
+        } while (MyUtil.validateID(studentID) == false);
 
         String studentName = MyUtil.inputString("Enter your full name: ");
 
