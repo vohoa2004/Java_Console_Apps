@@ -2,56 +2,53 @@ package gui;
 
 import core.Student;
 import core.StudentList;
-import utils.MyUtils;
 import java.util.ArrayList;
+import utils.MyUtil;
 
+/**
+ *
+ * @author admin
+ */
 public class Tester {
     public static void main(String[] args) {
         StudentList studentList = new StudentList();
         studentList.readFromFile();
-
-        System.out.println("Welcome to Student Management System");
-
-        while (true) {
-            System.out.println("\nMenu:");
-            System.out.println("1. Create a student");
-            System.out.println("2. Read student information");
-            System.out.println("3. Update student information");
-            System.out.println("4. Delete student");
-            System.out.println("5. Show student list");
-            System.out.println("0. Exit");
-
-            int choice = MyUtils.inputInteger("Please enter your choice: ", 0, 5);
-
-            switch (choice) {
-                case 1:
-                    studentList.createStudent();
-                    studentList.writeToFile();
-                    break;
-                case 2:
-                    Student student = studentList.readStudentInfor(MyUtils.inputString("Enter student ID: "));
-                    if (student != null) {
-                        System.out.println("Student Information:");
-                        System.out.println(student.toString());
-                    } else {
-                        System.out.println("Student not found");
-                    }
-                    break;
-                case 3:
-                    studentList.updateStudentInformation();
-                    studentList.writeToFile();
-                    break;
-                case 4:
-                    studentList.deleteStudent();
-                    studentList.writeToFile();
-                    break;
-                case 5:
-                    studentList.showStudentList();
-                    break;
-                case 0:
-                    System.out.println("Exiting...");
-                    System.exit(0);
+        ArrayList<String> Menu = new ArrayList<>();
+        Menu.add("Create a student");
+        Menu.add("Read student information");
+        Menu.add("Update student information");
+        Menu.add("Dlete student");
+        Menu.add("Show student list");
+        for(int i = 0; i < Menu.size(); i++) {
+            System.out.println(i+1 + ". " + Menu.get(i));
+        }
+        Integer choice = MyUtil.inputInteger("Please enter your choice:", 1, 5);
+        
+         if(choice == 1) {
+            studentList.createStudent();
+            studentList.writeToFile();
+        }
+        if(choice == 2) {
+            Student readInfor = studentList.readStudentInfor();
+            if(readInfor == null) {
+                System.out.println("Wrong studentID");
+            } else {   
+                System.out.println("Your info: ");
+                System.out.println(readInfor.getStudentID() + ", " + 
+                readInfor.getStudentName() + ", " + readInfor.getDob() + 
+                        ", " + readInfor.getEmail()+  ", " + readInfor.getPhoneNumber());
             }
+        }
+        if(choice==3){
+            studentList.updateStudentInfor();
+            studentList.writeToFile();
+        }
+        if(choice==4){
+            studentList.deleteStudent();
+            studentList.writeToFile();
+        }
+        if(choice==5){
+            studentList.showStudentList();
         }
     }
 }
