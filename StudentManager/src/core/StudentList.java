@@ -1,27 +1,32 @@
 package core;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utils.MyUtil;
 
-import utils.MyUtils;
+public class StudentList extends ArrayList<Student> {
 
-public class StudentList {
     private static final String STUDENT_DATA_FILE = "src\\data\\student.txt";
-    private List<Student> students;
-
-    public StudentList() {
-        students = new ArrayList<>();
-    }
 
     public void readFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_DATA_FILE))) {
-            String line;
-            reader.readLine();
+        BufferedReader reader;
+        String line;
+        File file = new File(STUDENT_DATA_FILE);
+        if (!file.exists()) {
+            System.out.println("Student data file does not exist");
+            System.exit(0);
+        }
+        try {
+            reader = new BufferedReader(new FileReader(file));
+
+            line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] row = line.split(", ");
                 String studentID = row[0];
@@ -29,60 +34,62 @@ public class StudentList {
                 String dob = row[2];
                 String email = row[3];
                 String phoneNumber = row[4];
-                Student student = new Student(studentID, studentName, dob, email, phoneNumber);
-                students.add(student);
+                Student st = new Student(studentID, studentName, dob, email, phoneNumber);
+                this.add(st);
             }
+            reader.close();
         } catch (IOException e) {
-            System.out.println("An error occurred while reading the student data file: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
     public void writeToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_DATA_FILE))) {
-            writer.write("id, name, dob, email, phone");
-            writer.newLine();
-            for (Student student : students) {
-                writer.write(student.getStudentID() + ", " + student.getStudentName() + ", "
+        try {
+            PrintWriter out = new PrintWriter(STUDENT_DATA_FILE);
+            out.println("id, name, dob, email, phone");
+            for (Student student : this) {
+                out.println(student.getStudentID() + ", " + student.getStudentName() + ", "
                         + student.getDob() + ", " + student.getEmail() + ", " + student.getPhoneNumber());
-                writer.newLine();
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the student data file: " + e.getMessage());
+            out.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StudentList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void createStudent() {
+
         String studentID;
         do {
-            studentID = MyUtils.inputString("Enter a student ID: ");
-        } while (!MyUtils.validateID(studentID));
+            studentID = MyUtil.inputString("Enter a studentID: ");
+        } while (MyUtil.validateID(studentID));
 
-        String studentName = MyUtils.inputString("Enter your full name: ");
+        String studentName = MyUtil.inputString("Enter your full name: ");
 
         String dob;
         do {
-            dob = MyUtils.inputString("Enter your date of birth (dd/mm/yy): ");
-        } while (!MyUtils.validateDob(dob));
+            dob = MyUtil.inputString("Enter your day of birth: ");
+        } while (MyUtil.validateDob(dob) == false);
 
         String email;
         do {
-            email = MyUtils.inputString("Enter your email: ");
-        } while (!MyUtils.validateEmail(email));
+            email = MyUtil.inputString("Enter your email: ");
+        } while (MyUtil.validateEmail(email) == false);
 
         String phoneNumber;
         do {
-            phoneNumber = MyUtils.inputString("Enter your phone number: ");
-        } while (!MyUtils.validatePhone(phoneNumber));
+            phoneNumber = MyUtil.inputString("Enter your phone number: ");
+        } while (MyUtil.validatePhone(phoneNumber) == false);
 
         Student newStudent = new Student(studentID, studentName, dob, email, phoneNumber);
-        students.add(newStudent);
-        System.out.println("Student created successfully");
+        this.add(newStudent);
+        System.out.println("Create successfully");
     }
 
-    public Student readStudentInfor(String studentID) {
-        
-        studentID = MyUtils.inputString("Enter student ID: ");
-        for (Student student : students) {
+    public Student readStudentInfor() {
+        String studentID;
+        studentID = MyUtil.inputString("Enter student ID: ");
+        for (Student student : this) {
             if (student.getStudentID().equals(studentID)) {
                 return student;
             }
@@ -90,42 +97,45 @@ public class StudentList {
         return null;
     }
 
-    public void updateStudentInformation() {
-        String studentID = MyUtils.inputString("Enter student ID: ");
-        Student student = readStudentInfor(studentID);
-        if (student != null) {
-            String newName = MyUtils.inputString("Enter new name: ");
-            student.setStudentName(newName);
+    public void updateStudentInfor() {
+        String studentID;
+        studentID = MyUtil.inputString("Enter student ID: ");
+        for (Student student : this) {
+            if (student.getStudentID().equals(studentID)) {
+                String newName = MyUtil.inputString("Enter new name: ");
+                student.setStudentName(newName);
 
-            String newDob = MyUtils.inputString("Enter new date of birth (dd/mm/yy): ");
-            student.setDob(newDob);
+                String newDob = MyUtil.inputString("Enter new date of birth(dd/mm/yy: ");
+                student.setDob(newDob);
 
-            String newEmail = MyUtils.inputString("Enter new email: ");
-            student.setEmail(newEmail);
+                String newEmail = MyUtil.inputString("Enter new email: ");
+                student.setEmail(newEmail);
 
-            String newPhone = MyUtils.inputString("Enter new phone number: ");
-            student.setPhoneNumber(newPhone);
+                String newPhone = MyUtil.inputString("Enter new phone: ");
+                student.setPhoneNumber(newPhone);
 
-            System.out.println("Student information updated successfully");
-        } else {
+                System.out.println("Student information update successfully");
+            }
             System.out.println("Student not found");
         }
     }
 
     public void deleteStudent() {
-        String studentID = MyUtils.inputString("Enter student ID: ");
-        Student student = readStudentInfor(studentID);
-        if (student != null) {
-            students.remove(student);
-            System.out.println("Student deleted successfully");
-        } else {
+        String studentID;
+        studentID = MyUtil.inputString("Enter student ID: ");
+        for (Student student : this) {
+            if (student.getStudentID().equals(studentID)) {
+                student.remove();
+                System.out.println("Student deleted successfully");
+            }
             System.out.println("Student not found");
         }
     }
 
     public void showStudentList() {
-        for (Student student : students) {
-            System.out.println(student.toString());
+        for (Student x : this) {
+            System.out.println(x);
         }
+
     }
 }
