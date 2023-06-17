@@ -66,9 +66,7 @@ public class Student {
         return "Student{" + "studentID=" + studentID + ", studentName=" + studentName + ", dob=" + dob + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
     }
 
-    void remove() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
  
     
 }
