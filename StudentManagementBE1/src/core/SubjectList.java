@@ -113,6 +113,7 @@ public class SubjectList extends ArrayList<Subject> {
         }
 
         public void displaySubjectList() {
+                System.out.println("Subject List: ");
                 for (Subject x : this) {
                         System.out.println(x.toString());
                 }
