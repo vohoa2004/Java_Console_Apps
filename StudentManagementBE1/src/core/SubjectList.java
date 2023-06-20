@@ -99,7 +99,6 @@ public class SubjectList extends ArrayList<Subject> {
                 return false;
         }
 
-        // bugs
         public boolean deleteSubject() {
                 String id = MyUtil.inputString("Enter ID of the subject you want to delete: ");
                 for (Subject x : this) {

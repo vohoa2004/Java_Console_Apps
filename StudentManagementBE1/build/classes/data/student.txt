@@ -1,3 +1,2 @@
 id, name, dob, email, phone
-SE222222, Vo Hoa, 11/11/11, vohoa@gmail.com, 0123456789
 SE123456, 1, 11/11/11, 11@vn.vn, 1234567890

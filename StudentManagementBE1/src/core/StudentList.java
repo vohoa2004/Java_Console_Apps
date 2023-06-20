@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.MyUtil;
 
-// bugs doc ghi file
 public class StudentList extends ArrayList<Student> {
 
         private static final String STUDENT_DATA_FILE = "src\\data\\student.txt";
@@ -113,7 +112,6 @@ public class StudentList extends ArrayList<Student> {
                 return null;
         }
 
-        // failed to write to file
         public void updateStudentInfor() {
                 String studentID;
                 boolean isFound = false;
@@ -162,20 +160,19 @@ public class StudentList extends ArrayList<Student> {
                 }
         }
 
-        // bugs
         public void deleteStudent() {
                 String studentID;
-//                boolean isFound = false;
+                boolean isFound = false;
                 studentID = MyUtil.inputString("Enter student ID: ");
                 for (Student student : this) {
                         if (student.getStudentID().equals(studentID)) {
                                 this.remove(student);
                                 System.out.println("Student deleted successfully");
-//                                isFound = true;
+                                isFound = true;
                         }
                 }
-//                if (isFound == false) 
-//                        System.out.println("Student not found");
+              if (isFound == false) 
+                    System.out.println("Student not found");
         }
 
         public void showStudentList() {
