@@ -160,25 +160,23 @@ public class StudentList extends ArrayList<Student> {
                 }
         }
 
-        public void deleteStudent() {
-                String studentID;
-                boolean isFound = false;
-                studentID = MyUtil.inputString("Enter student ID: ");
-                for (Student student : this) {
-                        if (student.getStudentID().equals(studentID)) {
-                                this.remove(student);
+        public boolean deleteStudent() {
+                String id = MyUtil.inputString("Enter ID of the subject you want to delete: ");
+                for (Student x : this) {
+                        if (x.getStudentID().equals(id)) {
+                                this.remove(x);
                                 System.out.println("Student deleted successfully");
-                                isFound = true;
+                                return true;
+                                
                         }
                 }
-              if (isFound == false) 
-                    System.out.println("Student not found");
+                return false;
         }
-
+        
         public void showStudentList() {
+                System.out.println("Student List: ");
                 for (Student x : this) {
                         System.out.println(x);
                 }
-
         }
 }

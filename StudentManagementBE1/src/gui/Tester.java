@@ -113,7 +113,9 @@ public class Tester {
                                 }
 
                                 case 11: {
-                                        studentList.deleteStudent();
+                                        if (!studentList.deleteStudent()) {
+                                                System.out.println("Student not found!");
+                                        }
                                         studentList.writeToFile();
                                         break;
                                 }
