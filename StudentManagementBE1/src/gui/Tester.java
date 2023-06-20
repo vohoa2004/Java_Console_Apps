@@ -69,6 +69,7 @@ public class Tester {
                                         break;
                                 case 3:
                                         subjectList.createSubject();
+                                        subjectList.writeToFile();
                                         break;
                                 case 4:
                                         subjectList.searchSubjectByID();
@@ -82,6 +83,7 @@ public class Tester {
                                         if (!subjectList.deleteSubject()) {
                                                 System.out.println("Subject not found!");
                                         }
+                                        subjectList.writeToFile();
                                         break;
                                 case 7: {
                                         subjectList.displaySubjectList();
