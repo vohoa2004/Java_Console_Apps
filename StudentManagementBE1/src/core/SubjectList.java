@@ -105,7 +105,9 @@ public class SubjectList extends ArrayList<Subject> {
                 for (Subject x : this) {
                         if (x.getSubjectID().equals(id)) {
                                 this.remove(x);
+                                System.out.println("Subject deleted");
                                 return true;
+                                
                         }
                 }
                 return false;
