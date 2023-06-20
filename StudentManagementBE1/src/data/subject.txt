@@ -1,0 +1,4 @@
+subject ID, Subject Name, Credit
+2, 2, 2
+b, b, 12
+a, a, 3
