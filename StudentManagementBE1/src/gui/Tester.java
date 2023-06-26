@@ -7,6 +7,7 @@ package gui;
 import core.Student;
 import core.StudentList;
 import core.SubjectList;
+import core.Transcript;
 import core.User;
 import core.UserList;
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ public class Tester {
                 UserList userList = new UserList();
                 SubjectList subjectList = new SubjectList();
                 StudentList studentList = new StudentList();
-
+                Transcript gradeList = new Transcript();
+                
                 userList.readFromFile();
                 subjectList.readFromFile();
                 studentList.readFromFile();
-
+                gradeList.readFromFile();
+                
                 ArrayList<String> Menu = new ArrayList<>();
                 Menu.add("Login");
                 Menu.add("Register");
@@ -42,6 +45,9 @@ public class Tester {
                 Menu.add("Delete student");
                 Menu.add("Show student list");
                 
+                Menu.add("create grade");
+                Menu.add("show grade list");
+                
                 Menu.add("Exit");
 
                 Integer choice;
@@ -51,7 +57,7 @@ public class Tester {
                                 System.out.println(i + 1 + ". " + Menu.get(i));
                         }
                         System.out.println("==================================");
-                        choice = MyUtil.inputInteger("Please enter your choice: ", 1, 13);
+                        choice = MyUtil.inputInteger("Please enter your choice: ", 1, 15);
 
                         switch (choice) {
                                 case 1:
@@ -124,7 +130,16 @@ public class Tester {
                                         studentList.showStudentList();
                                         break;
                                 }
+                             
                                 case 13: {
+                                    gradeList.createGrade();
+                                    break;
+                                }
+                                case 14: {
+                                    gradeList.displayGradeList();
+                                    break;
+                                }  
+                                case 15: {
                                         System.exit(0);
                                 }
                                 default:
@@ -132,10 +147,10 @@ public class Tester {
                                         break;
                         }
 
-                } while (choice != 13);
+                } while (choice != 15);
 
                 userList.writeToFile();
                 subjectList.writeToFile();
-                
+                gradeList.writeToFile();
         }
 }

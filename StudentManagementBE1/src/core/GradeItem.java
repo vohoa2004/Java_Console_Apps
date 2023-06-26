@@ -12,17 +12,13 @@ public class GradeItem {
      private double labGrade;
     private double progressTestGrade;
     private double finalTestGrade;
-
-    public GradeItem() {
-        this.labGrade = 0.0;
-        this.progressTestGrade = 0.0;
-        this.finalTestGrade = 0.0;
-    }
-
-    public GradeItem(double labGrade, double progressTestGrade, double finalTestGrade) {
-        this.labGrade = labGrade;
-        this.progressTestGrade = progressTestGrade;
-        this.finalTestGrade = finalTestGrade;
+    private double averageGrade;
+    
+    public GradeItem(double labGrade1, double progressTestGrade1, double finalTestGrade1, double averageGrade) {
+        this.labGrade = labGrade1;
+        this.progressTestGrade = progressTestGrade1;
+        this.finalTestGrade = finalTestGrade1;
+        this.averageGrade =(labGrade1+ progressTestGrade1+ finalTestGrade1)/3;
     }
 
     public double getLabGrade() {
@@ -49,7 +45,17 @@ public class GradeItem {
         this.finalTestGrade = finalTestGrade;
     }
 
-    public double getAverageGrade() {
-        return (labGrade + progressTestGrade + finalTestGrade) / 3.0;
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
     }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    @Override
+    public String toString() {
+        return "labGrade=" + labGrade + ", progressTestGrade=" + progressTestGrade + ", finalTestGrade=" + finalTestGrade ;
+    }
+    
 }

@@ -31,6 +31,21 @@ public class MyUtil {
                         }
                 } while (true);
         }
+        public static Double inputDouble(String message, int min, int max) {
+                Scanner sc = new Scanner(System.in);
+                do {
+                        try {
+                                System.out.print(message);
+                                Double number = Double.parseDouble(sc.nextLine());
+                                if (number >= min && number <= max) {
+                                        return number;
+                                }
+                                System.out.println("Value is only in [" + min + ", " + max + "]");
+                        } catch (Exception e) {
+                                System.out.println("Required number");
+                        }
+                } while (true);
+        }
 
         // string ko can try-catch
         public static String inputString(String message) {
