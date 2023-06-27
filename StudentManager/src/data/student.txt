@@ -1,2 +1,0 @@
-id, name, dob, email,phone
-
