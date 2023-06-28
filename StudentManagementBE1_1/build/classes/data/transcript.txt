@@ -1,9 +1,11 @@
 SE123456, CSI, labGrade:8.6, progressTestGrade:7.9, finalTestGrade:5.3
+SE144244, MAE101, labGrade:10.0, progressTestGrade:9.0, finalTestGrade:8.0
 SE444444, CEA, labGrade:10.0, progressTestGrade:9.0, finalTestGrade:8.0
-SE183659, OSG202, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:9.5
+SE183659, OSG202, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE183659, MAD, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE183659, PRO192, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE183659, CSI, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
+SE183659, SSG104, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE183659, Math, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE183659, CEA, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
 SE667788, Math, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0
@@ -17,3 +19,4 @@ SE444111, 5, labGrade:7.0, progressTestGrade:7.0, finalTestGrade:9.0
 SE444111, PRO192, labGrade:8.0, progressTestGrade:5.0, finalTestGrade:9.0
 SE444111, CSI, labGrade:10.0, progressTestGrade:9.0, finalTestGrade:8.0
 SE444111, Math, labGrade:10.0, progressTestGrade:1.0, finalTestGrade:10.0
+SE183659, MAE101, labGrade:10.0, progressTestGrade:10.0, finalTestGrade:10.0

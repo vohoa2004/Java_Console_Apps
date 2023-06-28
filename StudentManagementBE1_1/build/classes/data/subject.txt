@@ -1,6 +1,5 @@
 subject ID, Subject Name, Credit
 PRO192, Java, 3
-3, 3, 3
 ABC, learn alphabet, 3
 CEA, Kien Truc May Tinh, 3
 Math, Math, 3

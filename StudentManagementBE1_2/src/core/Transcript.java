@@ -116,7 +116,6 @@ public class Transcript extends ArrayList<GradeItem> {
                 return subjectIds;
         }
 
-        // them exception nullpointer 
         public void createGrade(StudentList studentList) {
                 boolean isFound = false;
                 String studentID = MyUtil.inputString("Enter student ID: ");

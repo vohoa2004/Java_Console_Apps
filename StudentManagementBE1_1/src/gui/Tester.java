@@ -12,6 +12,22 @@ import utils.MyUtil;
 
 public class Tester {
 
+        public static Integer getChoice() {
+                ArrayList<String> Menu = new ArrayList<>();
+
+                //login
+                Menu.add("Login");
+                Menu.add("Register");
+                Menu.add("Exit");
+                System.out.println("=================HOME PAGE=================");
+                for (int i = 0; i < 3; i++) {
+                        System.out.println(i + 1 + ". " + Menu.get(i));
+                }
+                System.out.println("===========================================");
+                Integer choice = MyUtil.inputInteger("Please enter your choice: ", 1, 3);
+                return choice;
+        }
+
         public static void main(String[] args) {
                 UserList userList = new UserList();
                 SubjectList subjectList = new SubjectList();
@@ -24,11 +40,10 @@ public class Tester {
                 transcript.readFromFile();
 
                 ArrayList<String> Menu = new ArrayList<>();
-                
-                //login
                 Menu.add("Login");
                 Menu.add("Register");
-                
+                Menu.add("Exit");
+
                 //subject
                 Menu.add("Create Subject");
                 Menu.add("Search subject by ID");
@@ -48,131 +63,146 @@ public class Tester {
                 Menu.add("Show transcript by student");
                 Menu.add("Enter grade of ungraded subject by student ID");
                 Menu.add("Update grade by student ID");
-                
-                //transcript by subject
-
-                Menu.add("Exit");
-
-                Integer choice;
+                Menu.add("Back to Homepage");
                 do {
-                        System.out.println("==================================");
-                        for (int i = 0; i < Menu.size(); i++) {
-                                System.out.println(i + 1 + ". " + Menu.get(i));
-                        }
-                        System.out.println("==================================");
-                        choice = MyUtil.inputInteger("Please enter your choice: ", 1, 17);
-
-                        switch (choice) {
+                        switch (getChoice()) {
                                 case 1:
                                         User loginUser = userList.login();
                                         if (loginUser == null) {
                                                 System.out.println("Wrong username or password");
                                         } else {
+                                                Integer select;
                                                 System.out.println("Login success");
                                                 System.out.println("Your info: ");
                                                 System.out.println(loginUser.getUsername() + ", " + loginUser.getPassword() + ", " + loginUser.getFullName() + ", " + loginUser.getEmail());
+                                                do {
+                                                        System.out.println("================= Student Management Menu =================");
+                                                        System.out.println("A. SUBJECT: ");
+                                                        for (int i = 3; i < 8; i++) {
+                                                                System.out.println(i - 2 + ". " + Menu.get(i));
+                                                        }
+                                                        System.out.println("");
+                                                        System.out.println("B. STUDENT: ");
+                                                        for (int i = 8; i < 14; i++) {
+                                                                System.out.println(i - 2 + ". " + Menu.get(i));
+                                                        }
+                                                         System.out.println("");
+                                                        System.out.println("B. TRANSCRIPT: ");
+                                                        for (int i = 14; i < 17; i++) {
+                                                                System.out.println(i - 2 + ". " + Menu.get(i));
+                                                        }
+                                                        System.out.println("===========================================================");
+                                                        select = MyUtil.inputInteger("Please enter your choice: ", 1, 15);
+                                                        switch (select) {
+                                                                case 1:
+                                                                        subjectList.createSubject();
+                                                                        subjectList.writeToFile();
+                                                                        break;
+                                                                case 2:
+
+                                                                        Subject x = subjectList.searchSubjectByID();
+                                                                        if (x == null) {
+                                                                                System.out.println("Wrong subject ID");
+                                                                        } else {
+
+                                                                                System.out.println(x.toString());
+                                                                        }
+                                                                        break;
+
+                                                                case 3:
+                                                                        if (!subjectList.updateSubject()) {
+                                                                                System.out.println("Subject not found!");
+                                                                        }
+                                                                        break;
+                                                                case 4:
+                                                                        if (!subjectList.deleteSubject()) {
+                                                                                System.out.println("Subject not found!");
+                                                                        }
+                                                                        subjectList.writeToFile();
+                                                                        break;
+                                                                case 5: {
+                                                                        subjectList.displaySubjectList();
+                                                                        break;
+                                                                }
+                                                                // bug
+                                                                case 6:
+                                                                        studentList.createStudent();
+                                                                        studentList.writeToFile();
+                                                                        break;
+                                                                case 7: {
+                                                                        Student readInfor = studentList.readStudentInfor();
+                                                                        if (readInfor == null) {
+                                                                                System.out.println("Wrong student ID");
+                                                                        } else {
+                                                                                System.out.println("Student info: ");
+                                                                                System.out.println(readInfor.toString());
+                                                                        }
+                                                                        break;
+                                                                }
+
+                                                                case 8: {
+                                                                        studentList.updateStudentInfor();
+                                                                        studentList.writeToFile();
+                                                                        break;
+                                                                }
+
+                                                                case 9: {
+                                                                        if (!studentList.deleteStudent()) {
+                                                                                System.out.println("Student not found!");
+                                                                        }
+                                                                        studentList.writeToFile();
+                                                                        break;
+                                                                }
+
+                                                                case 10: {
+                                                                        studentList.showStudentList();
+                                                                        break;
+                                                                }
+
+                                                                // cho mot hs theo id join mot mon hoc theo id
+                                                                case 11: {
+                                                                        studentList.studentJoinSubject(subjectList);
+                                                                        studentList.writeToFile();
+                                                                        studentList.writeSubjectByStudentToFile();
+                                                                        break;
+                                                                }
+
+                                                                case 12: {
+                                                                        String id = MyUtil.inputString("Enter student ID: ");
+                                                                        transcript.displayGradeList(id);
+                                                                        break;
+                                                                }
+                                                                case 13: {
+                                                                        // tao transcript moi cho mot mon da hoc nhung chua co diem                                        
+                                                                        transcript.createGrade(studentList);
+                                                                        transcript.writeToFile();
+                                                                        break;
+                                                                }
+                                                                case 14: {
+                                                                        // thay doi diem so
+                                                                        transcript.updateGrade(studentList);
+                                                                        transcript.writeToFile();
+                                                                        break;
+                                                                }
+                                                                case 15: {
+                                                                        System.exit(0);
+                                                                        break;
+                                                                }
+                                                        }
+                                                } while (true);
+
                                         }
                                         break;
                                 case 2:
                                         userList.register();
                                         break;
-                                case 3:
-                                        subjectList.createSubject();
-                                        subjectList.writeToFile();
-                                        break;
-                                case 4:
 
-                                        Subject x = subjectList.searchSubjectByID();
-                                        if (x == null) {
-                                                System.out.println("Wrong subject ID");
-                                        } else {
-
-                                                System.out.println(x.toString());
-                                        }
-                                        break;
-
-                                case 5:
-                                        if (!subjectList.updateSubject()) {
-                                                System.out.println("Subject not found!");
-                                        }
-                                        break;
-                                case 6:
-                                        if (!subjectList.deleteSubject()) {
-                                                System.out.println("Subject not found!");
-                                        }
-                                        subjectList.writeToFile();
-                                        break;
-                                case 7: {
-                                        subjectList.displaySubjectList();
-                                        break;
-                                }
-                                case 8:
-                                        studentList.createStudent();
-                                        studentList.writeToFile();
-                                        break;
-                                case 9: {
-                                        Student readInfor = studentList.readStudentInfor();
-                                        if (readInfor == null) {
-                                                System.out.println("Wrong student ID");
-                                        } else {
-                                                System.out.println("Student info: ");
-                                                System.out.println(readInfor.toString());
-                                        }
-                                        break;
-                                }
-
-                                case 10: {
-                                        studentList.updateStudentInfor();
-                                        studentList.writeToFile();
-                                        break;
-                                }
-
-                                case 11: {
-                                        if (!studentList.deleteStudent()) {
-                                                System.out.println("Student not found!");
-                                        }
-                                        studentList.writeToFile();
-                                        break;
-                                }
-
-                                case 12: {
-                                        studentList.showStudentList();
-                                        break;
-                                }
-
-                                // cho mot hs theo id join mot mon hoc theo id
-                                case 13: {
-                                        studentList.studentJoinSubject(subjectList);
-                                        studentList.writeToFile();
-                                        studentList.writeSubjectByStudentToFile();
-                                        break;
-                                }
-
-                                case 14: {
-                                        String id = MyUtil.inputString("Enter student ID: ");
-                                        transcript.displayGradeList(id);
-                                        break;
-                                }
-                                case 15: {
-                                        // tao transcript moi cho mot mon da hoc nhung chua co diem                                        
-                                        transcript.createGrade(studentList);
-                                        transcript.writeToFile();
-                                        break;
-                                }
-                                case 16: {
-                                        // thay doi diem so
-                                        transcript.updateGrade(studentList);
-                                        transcript.writeToFile();
-                                        break;
-                                }
-                                case 17: {
+                                case 3: {
                                         System.exit(0);
                                 }
-                                default:
-                                        System.out.println("Invalid choice. Please try again.");
-                                        break;
+
                         }
-                } while (choice != 17);
+                } while (getChoice() != 3);
                 userList.writeToFile();
                 subjectList.writeToFile();
         }

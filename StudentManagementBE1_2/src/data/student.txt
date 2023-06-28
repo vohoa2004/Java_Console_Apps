@@ -1,9 +1,10 @@
 id, name, dob, email, phone, subject joined
 SE333333, abc, 11/11/2011, abc@abc.abc, 0987654322, [5, CEA, Math, PRO192, SSG104]
 SE123456, ABC, 01/01/2010, abc@abc.vn, 1234567890, [PRO192, CSI, CEA]
-SE183659, Vo Thi Mai Hoa, 02/01/2004, vothimaihoa123@gmail.com, 0397242598, [Math, PRO192, CEA, MAD, OSG202, SSG104, MAE101]
+SE183659, Vo Thi Mai Hoa, 02/01/2004, vothimaihoa123@gmail.com, 0397242598, [Math, PRO192, CEA, MAD, OSG202]
 SE667788, DEF, 03/03/2003, def@def.vn, 0998877665, [Math]
 SE987654, Toi La Ai?, 10/10/2010, abc@123.vn, 1234567890, [PRO192]
 SE777888, Tam Bay, 11/11/2011, abc@abc.abc, 0987654321, []
 SE111111, ABC, 11/11/2022, abc@abc.vn, 0987654321, [PRF192]
-SE144244, abc, 10/10/2010, abc@abc.vn, 0987654321, null
+SE183695, abc, 22/22/2022, abc@abc.vn, 0987654321, null
+SE123444, ABC, 02/01/2004, abc@abc.vn, 0987776661, [ABC]
