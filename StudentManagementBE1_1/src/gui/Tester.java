@@ -19,11 +19,11 @@ public class Tester {
                 Menu.add("Login");
                 Menu.add("Register");
                 Menu.add("Exit");
-                System.out.println("=================HOME PAGE=================");
+                System.out.println("================= HOME PAGE =================");
                 for (int i = 0; i < 3; i++) {
                         System.out.println(i + 1 + ". " + Menu.get(i));
                 }
-                System.out.println("===========================================");
+                System.out.println("=============================================");
                 Integer choice = MyUtil.inputInteger("Please enter your choice: ", 1, 3);
                 return choice;
         }
@@ -63,7 +63,7 @@ public class Tester {
                 Menu.add("Show transcript by student");
                 Menu.add("Enter grade of ungraded subject by student ID");
                 Menu.add("Update grade by student ID");
-                Menu.add("Back to Homepage");
+                Menu.add("Exit");
                 do {
                         switch (getChoice()) {
                                 case 1:
@@ -86,11 +86,13 @@ public class Tester {
                                                         for (int i = 8; i < 14; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
-                                                         System.out.println("");
+                                                        System.out.println("");
                                                         System.out.println("B. TRANSCRIPT: ");
                                                         for (int i = 14; i < 17; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
+                                                        System.out.println("");
+                                                        System.out.println( "15. " + Menu.get(17));
                                                         System.out.println("===========================================================");
                                                         select = MyUtil.inputInteger("Please enter your choice: ", 1, 15);
                                                         switch (select) {
