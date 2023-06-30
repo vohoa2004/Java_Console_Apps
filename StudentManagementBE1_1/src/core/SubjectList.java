@@ -96,8 +96,9 @@ public class SubjectList extends ArrayList<Subject> {
                 return false;
         }
 
-        public boolean deleteSubject() {
-                String id = MyUtil.inputString("Enter ID of the subject you want to delete: ");
+        public boolean deleteSubject(String id) {
+                
+                
                 for (Subject x : this) {
                         if (x.getSubjectID().equals(id)) {
                                 this.remove(x);

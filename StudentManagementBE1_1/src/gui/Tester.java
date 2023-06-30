@@ -65,7 +65,7 @@ public class Tester {
                 Menu.add("Enter grade of ungraded subject by student ID");
                 Menu.add("Update grade by student ID");
                 Menu.add("Show transcript by subject");
-               
+
                 Menu.add("Exit");
                 Integer choice;
                 do {
@@ -101,7 +101,7 @@ public class Tester {
                                                         }
                                                         System.out.println("");
                                                         System.out.println("16. " + Menu.get(18));
-                                                        
+
                                                         System.out.println("===========================================================");
                                                         select = MyUtil.inputInteger("Please enter your choice: ", 1, 17);
                                                         switch (select) {
@@ -132,7 +132,7 @@ public class Tester {
                                                                                 System.out.println("Student not found!");
                                                                         }
                                                                         studentList.writeToFile();
-                                                                        transcript.writeToFile();
+
                                                                         break;
                                                                 }
 
@@ -161,15 +161,30 @@ public class Tester {
                                                                                 System.out.println("Subject not found!");
                                                                         }
                                                                         subjectList.writeToFile();
-                                                                        transcript.writeToFile();
+
                                                                         break;
-                                                                case 9:
-                                                                        if (!subjectList.deleteSubject()) {
-                                                                                System.out.println("Subject not found!");
+                                                                case 9: {
+                                                                        String id = MyUtil.inputString("Enter ID of the subject you want to delete: ");
+                                                                        if (subjectList.searchSubject(id) == null) {
+                                                                                System.out.println("Not found this subject");
+                                                                        } else {
+                                                                                boolean isLearn = false;
+                                                                                for (Student n : studentList) {
+                                                                                        if (n.getSubjectIDs().contains(id)) {
+                                                                                                System.out.println("Cannot delete this subject because some students are studying");
+                                                                                                isLearn = true;
+                                                                                                break;
+                                                                                        }      
+                                                                                }
+                                                                                if (isLearn == false) {
+                                                                                        subjectList.deleteSubject(id);
+                                                                                        subjectList.writeToFile();
+                                                                                }
+                                                                                        
                                                                         }
-                                                                        subjectList.writeToFile();
-                                                                        transcript.writeToFile();
                                                                         break;
+                                                                }
+
                                                                 case 10: {
                                                                         subjectList.displaySubjectList();
                                                                         break;
@@ -200,12 +215,12 @@ public class Tester {
                                                                         transcript.writeToFile();
                                                                         break;
                                                                 }
-                                                                case 15 :{
+                                                                case 15: {
                                                                         String id = MyUtil.inputString("Enter subject ID: ");
                                                                         transcript.displayGradeListBySubject(id);
                                                                         break;
                                                                 }
-                                                               
+
                                                                 case 16: {
                                                                         System.exit(0);
                                                                         break;

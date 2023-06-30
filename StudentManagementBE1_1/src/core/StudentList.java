@@ -168,11 +168,6 @@ public class StudentList extends ArrayList<Student> {
                 for (Student student : this) {
                         if (student.getStudentID().equals(studentID)) {
                                 isFound = true;
-                                // ID
-//                                String newStudentID;
-//                                do {
-//                                        newStudentID = MyUtil.inputString("Enter new studentID: ");
-//                                } while (MyUtil.validateID(newStudentID) == false);
                                 boolean isUnique;
                                 // ID
                                 String newStudentID;
@@ -235,14 +230,15 @@ public class StudentList extends ArrayList<Student> {
                 String id = MyUtil.inputString("Enter ID of the student you want to delete: ");
                 for (Student x : this) {
                         if (x.getStudentID().equals(id)) {
-                                if (x.getSubjectIDs() == null) {
+                                if (x.getSubjectIDs().size() == 0) {
                                         this.remove(x);
                                         System.out.println("Student deleted successfully");
-                                        return true;
+                                        
                                 }
                                 else {
                                         System.out.println("Cannot delete because this student has learnt some subjects");
                                 }
+                                return true;
                         }
                 }
                 return false;
