@@ -6,3 +6,10 @@ def, 123, 123, abc@def.com
 hoaa, 1234@3#Acd, 1, abc@123.com
 1234, 12345678A@b, ABC, def@123.com
 1, 2123@#Abq, 3, abc@a.com
+vomaichi, 0408A123@Bc, Vo Mai Chi, chi@123.vn
+abcde, abcde123@F, 1, 123@123.abc
+abcdef, 123@123A123a, ABC, abc@123.edu
+test, test444A#123, Test, test@test.com
+abcdefg, 098XYZ123@a, A B C, abc@123.edu
+abcdefgh, 111222AAAaaa@, A B C, abc@123.abc
+abcdefghik, abcdef123@AB, A B C, abc@abc.com

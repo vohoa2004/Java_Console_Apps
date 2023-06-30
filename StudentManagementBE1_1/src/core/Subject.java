@@ -47,7 +47,7 @@ public class Subject {
 
         @Override
         public String toString() {
-                return  "Subject ID: " + subjectID + ", Subject Name: " + subjectName + ", Credit: " + credit;
+                return  String.format("Subject ID: %-12s Subject Name: %-40s Credit: %d", subjectID, subjectName, credit) ;
         }
 
 }

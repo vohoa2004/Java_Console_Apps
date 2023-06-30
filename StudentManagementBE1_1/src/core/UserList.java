@@ -108,6 +108,7 @@ public class UserList extends ArrayList<User> {
                 User user = new User(username, password, fullName, email);
 
                 this.add(user);
+                System.out.println("Register successfully!");
         }
 
 }

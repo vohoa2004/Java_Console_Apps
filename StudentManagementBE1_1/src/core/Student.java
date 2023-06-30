@@ -83,7 +83,8 @@ public class Student {
 
         @Override
         public String toString() {
-                return "Student{" + "studentID=" + studentID + ", studentName=" + studentName + ", dob=" + dob + ", email=" + email + ", phoneNumber=" + phoneNumber + ", subjectIDs=" + subjectIDs + '}';
+                return String.format("Student ID: %-10s Student Name: %-20s Birth Date: %-15s Email: %-30s Phone Number: %-15s Enrolled Subject IDs: %s",
+            studentID, studentName, dob, email, phoneNumber, subjectIDs);
         }
 
         public void joinSubject(String id) {

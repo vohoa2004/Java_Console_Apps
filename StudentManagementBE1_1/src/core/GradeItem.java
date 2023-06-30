@@ -68,7 +68,7 @@ public class GradeItem {
 
         @Override
         public String toString() {
-                return "GradeItem{" + "studentID=" + studentID + ", subjectID=" + subjectID + ", labGrade=" + labGrade + ", progressTestGrade=" + progressTestGrade + ", finalTestGrade=" + finalTestGrade + ", averageGrade=" + averageGrade + '}';
+                return "Grade:" + "studentID=" + studentID + ", subjectID=" + subjectID + ", labGrade=" + labGrade + ", progressTestGrade=" + progressTestGrade + ", finalTestGrade=" + finalTestGrade + ", averageGrade=" + averageGrade ;
         }
 
 }

@@ -100,19 +100,24 @@ public class Transcript extends ArrayList<GradeItem> {
                 boolean found = false;
                 HashSet<String> gradedSubjects = new HashSet<>();
                 ArrayList<String> subjectIds = new ArrayList<>();
-                for (GradeItem grade : this) {
-                        if (grade.getStudentID().equals(studentID)) {
-                                gradedSubjects.add(grade.getSubjectID());
+                try {
+                        for (GradeItem grade : this) {
+                                if (grade.getStudentID().equals(studentID)) {
+                                        gradedSubjects.add(grade.getSubjectID());
+                                }
                         }
-                }
-                for (String subjectID : studentList.searchStudent(studentID).getSubjectIDs()) {
-                        if (!gradedSubjects.contains(subjectID)) {
-                                
-                                found = true;
-                                subjectIds.add(subjectID);
-                        }
-                }
+                        for (String subjectID : studentList.searchStudent(studentID).getSubjectIDs()) {
+                                if (!gradedSubjects.contains(subjectID)) {
 
+                                        found = true;
+                                        subjectIds.add(subjectID);
+                                }
+                        }
+
+                } catch (NullPointerException e) {
+                        System.out.println("This student hasn't enrolled in any subjects.");
+
+                }
                 return subjectIds;
         }
 
@@ -146,11 +151,11 @@ public class Transcript extends ArrayList<GradeItem> {
                                         break; // Exit the loop after finding a matching student
                                 }
                         }
+                        if (!isFound) {
+                                System.out.println("This student or subject does not exist or this student is not studying this subject!");
+                        }
                 }
 
-                if (!isFound) {
-                        System.out.println("This student or subject does not exist or this student is not studying this subject!");
-                }
         }
 
         public void updateGrade(StudentList studentList) {
@@ -181,17 +186,22 @@ public class Transcript extends ArrayList<GradeItem> {
 
         public void displayGradeList(String id) {
                 System.out.println("Grade List:");
-                if (isEmpty()) {
+                if (this.isEmpty()) {
                         System.out.println("No grades available");
                 } else {
+                        boolean isFound = false;
                         for (GradeItem gradeItem : this) {
                                 if (gradeItem.getStudentID().equals(id)) {
-                                        System.out.print("Subject: " + gradeItem.getSubjectID() + ", ");
-                                        System.out.print("Lab Grade: " + gradeItem.getLabGrade() + ", ");
-                                        System.out.print("Progress Test Grade: " + gradeItem.getProgressTestGrade() + ", ");
-                                        System.out.print("Final Test Grade: " + gradeItem.getFinalTestGrade() + ", ");
+                                        System.out.printf("Subject: %-10s", gradeItem.getSubjectID());
+                                        System.out.printf("Lab Grade: %-8s", gradeItem.getLabGrade());
+                                        System.out.printf("Progress Test Grade: %-8s", gradeItem.getProgressTestGrade());
+                                        System.out.printf("Final Test Grade: %-8s", gradeItem.getFinalTestGrade());
                                         System.out.printf("Average Grade: %.2f\n", gradeItem.getAverageGrade());
+                                        isFound = true;
                                 }
+                        }
+                        if (isFound == false) {
+                                System.out.println("No grades for this student!");
                         }
                 }
         }

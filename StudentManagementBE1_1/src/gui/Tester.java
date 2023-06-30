@@ -64,8 +64,10 @@ public class Tester {
                 Menu.add("Enter grade of ungraded subject by student ID");
                 Menu.add("Update grade by student ID");
                 Menu.add("Exit");
+                Integer choice;
                 do {
-                        switch (getChoice()) {
+                        choice = getChoice();
+                        switch (choice) {
                                 case 1:
                                         User loginUser = userList.login();
                                         if (loginUser == null) {
@@ -115,6 +117,7 @@ public class Tester {
                                                                         if (!subjectList.updateSubject()) {
                                                                                 System.out.println("Subject not found!");
                                                                         }
+                                                                        subjectList.writeToFile();
                                                                         break;
                                                                 case 4:
                                                                         if (!subjectList.deleteSubject()) {
@@ -197,6 +200,7 @@ public class Tester {
                                         break;
                                 case 2:
                                         userList.register();
+                                        userList.writeToFile();
                                         break;
 
                                 case 3: {
@@ -204,8 +208,7 @@ public class Tester {
                                 }
 
                         }
-                } while (getChoice() != 3);
-                userList.writeToFile();
-                subjectList.writeToFile();
+                } while (choice != 3);
+                
         }
 }
