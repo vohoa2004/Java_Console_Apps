@@ -235,10 +235,14 @@ public class StudentList extends ArrayList<Student> {
                 String id = MyUtil.inputString("Enter ID of the student you want to delete: ");
                 for (Student x : this) {
                         if (x.getStudentID().equals(id)) {
-                                this.remove(x);
-                                System.out.println("Student deleted successfully");
-                                return true;
-
+                                if (x.getSubjectIDs() == null) {
+                                        this.remove(x);
+                                        System.out.println("Student deleted successfully");
+                                        return true;
+                                }
+                                else {
+                                        System.out.println("Cannot delete because this student has learnt some subjects");
+                                }
                         }
                 }
                 return false;

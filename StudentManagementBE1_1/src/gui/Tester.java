@@ -48,7 +48,7 @@ public class Tester {
                 Menu.add("Create a student");
                 Menu.add("Search student by ID");
                 Menu.add("Update student information");
-                Menu.add("Delete student");
+                Menu.add("Delete student by ID");
                 Menu.add("Show student list");
 
                 //subject
@@ -64,6 +64,8 @@ public class Tester {
                 Menu.add("Show transcript by student");
                 Menu.add("Enter grade of ungraded subject by student ID");
                 Menu.add("Update grade by student ID");
+                Menu.add("Show transcript by subject");
+               
                 Menu.add("Exit");
                 Integer choice;
                 do {
@@ -94,13 +96,14 @@ public class Tester {
                                                         System.out.println();
 
                                                         System.out.println("C. TRANSCRIPT: ");
-                                                        for (int i = 14; i < 17; i++) {
+                                                        for (int i = 14; i < 18; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
                                                         System.out.println("");
-                                                        System.out.println("15. " + Menu.get(17));
+                                                        System.out.println("16. " + Menu.get(18));
+                                                        
                                                         System.out.println("===========================================================");
-                                                        select = MyUtil.inputInteger("Please enter your choice: ", 1, 15);
+                                                        select = MyUtil.inputInteger("Please enter your choice: ", 1, 17);
                                                         switch (select) {
                                                                 // student
                                                                 case 1:
@@ -129,6 +132,7 @@ public class Tester {
                                                                                 System.out.println("Student not found!");
                                                                         }
                                                                         studentList.writeToFile();
+                                                                        transcript.writeToFile();
                                                                         break;
                                                                 }
 
@@ -157,12 +161,14 @@ public class Tester {
                                                                                 System.out.println("Subject not found!");
                                                                         }
                                                                         subjectList.writeToFile();
+                                                                        transcript.writeToFile();
                                                                         break;
                                                                 case 9:
                                                                         if (!subjectList.deleteSubject()) {
                                                                                 System.out.println("Subject not found!");
                                                                         }
                                                                         subjectList.writeToFile();
+                                                                        transcript.writeToFile();
                                                                         break;
                                                                 case 10: {
                                                                         subjectList.displaySubjectList();
@@ -179,7 +185,7 @@ public class Tester {
 
                                                                 case 12: {
                                                                         String id = MyUtil.inputString("Enter student ID: ");
-                                                                        transcript.displayGradeList(id);
+                                                                        transcript.displayGradeListByStudent(id);
                                                                         break;
                                                                 }
                                                                 case 13: {
@@ -194,7 +200,13 @@ public class Tester {
                                                                         transcript.writeToFile();
                                                                         break;
                                                                 }
-                                                                case 15: {
+                                                                case 15 :{
+                                                                        String id = MyUtil.inputString("Enter subject ID: ");
+                                                                        transcript.displayGradeListBySubject(id);
+                                                                        break;
+                                                                }
+                                                               
+                                                                case 16: {
                                                                         System.exit(0);
                                                                         break;
                                                                 }

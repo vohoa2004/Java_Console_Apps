@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -184,7 +186,8 @@ public class Transcript extends ArrayList<GradeItem> {
                 }
         }
 
-        public void displayGradeList(String id) {
+        public void displayGradeListByStudent(String id) {
+                ArrayList<GradeItem> a = new ArrayList<>();
                 System.out.println("Grade List:");
                 if (this.isEmpty()) {
                         System.out.println("No grades available");
@@ -192,18 +195,57 @@ public class Transcript extends ArrayList<GradeItem> {
                         boolean isFound = false;
                         for (GradeItem gradeItem : this) {
                                 if (gradeItem.getStudentID().equals(id)) {
-                                        System.out.printf("Subject: %-10s", gradeItem.getSubjectID());
-                                        System.out.printf("Lab Grade: %-8s", gradeItem.getLabGrade());
-                                        System.out.printf("Progress Test Grade: %-8s", gradeItem.getProgressTestGrade());
-                                        System.out.printf("Final Test Grade: %-8s", gradeItem.getFinalTestGrade());
-                                        System.out.printf("Average Grade: %.2f\n", gradeItem.getAverageGrade());
+                                        a.add(gradeItem);
                                         isFound = true;
                                 }
                         }
+                        sortByGrade(a);
                         if (isFound == false) {
                                 System.out.println("No grades for this student!");
                         }
                 }
+        }
+
+        public void displayGradeListBySubject(String id) {
+                ArrayList<GradeItem> a = new ArrayList<>();
+                System.out.println("Grade List:");
+                if (this.isEmpty()) {
+                        System.out.println("No grades available");
+                } else {
+                        boolean isFound = false;
+                        for (GradeItem gradeItem : this) {
+                                if (gradeItem.getSubjectID().equals(id)) {
+                                        a.add(gradeItem);
+                                        isFound = true;
+                                }
+                        }
+                        sortByGrade(a);
+                        if (isFound == false) {
+                                System.out.println("No grades for this subject!");
+                        }
+                }
+        }
+
+        public void sortByGrade(ArrayList<GradeItem> x) {
+                // tao object com de so sanh
+                Comparator com = new Comparator<GradeItem>() {
+
+                        @Override
+                        public int compare(GradeItem o2, GradeItem o1) {
+                                if (o1.getAverageGrade() > o2.getAverageGrade()) {
+                                        return 1;
+                                } else if (o1.getAverageGrade() == o2.getAverageGrade()) {
+                                        return 0;
+                                } else {
+                                        return -1;
+                                }
+                        }
+                };
+                Collections.sort(x, com);
+                for (GradeItem i : x) {
+                        System.out.println(i.toString());
+                }
+
         }
 
 }
