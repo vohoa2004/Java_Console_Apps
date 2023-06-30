@@ -44,6 +44,13 @@ public class Tester {
                 Menu.add("Register");
                 Menu.add("Exit");
 
+                //student
+                Menu.add("Create a student");
+                Menu.add("Search student by ID");
+                Menu.add("Update student information");
+                Menu.add("Delete student");
+                Menu.add("Show student list");
+
                 //subject
                 Menu.add("Create Subject");
                 Menu.add("Search subject by ID");
@@ -51,13 +58,7 @@ public class Tester {
                 Menu.add("Delete Subject By ID");
                 Menu.add("Show subject list");
 
-                //student
-                Menu.add("Create a student");
-                Menu.add("Search student by ID");
-                Menu.add("Update student information");
-                Menu.add("Delete student");
-                Menu.add("Show student list");
-                Menu.add("Let student learn subject");
+                Menu.add("Let student enrol a subject");
 
                 //transcript by student
                 Menu.add("Show transcript by student");
@@ -79,62 +80,34 @@ public class Tester {
                                                 System.out.println(loginUser.getUsername() + ", " + loginUser.getPassword() + ", " + loginUser.getFullName() + ", " + loginUser.getEmail());
                                                 do {
                                                         System.out.println("================= Student Management Menu =================");
-                                                        System.out.println("A. SUBJECT: ");
+                                                        System.out.println("A. STUDENT: ");
                                                         for (int i = 3; i < 8; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
-                                                        System.out.println("");
-                                                        System.out.println("B. STUDENT: ");
-                                                        for (int i = 8; i < 14; i++) {
+                                                        System.out.println();
+                                                        System.out.println("B. SUBJECT: ");
+                                                        for (int i = 8; i < 13; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
-                                                        System.out.println("");
-                                                        System.out.println("B. TRANSCRIPT: ");
+                                                        System.out.println();
+                                                        System.out.println(11 + ". " + Menu.get(13));
+                                                        System.out.println();
+
+                                                        System.out.println("C. TRANSCRIPT: ");
                                                         for (int i = 14; i < 17; i++) {
                                                                 System.out.println(i - 2 + ". " + Menu.get(i));
                                                         }
                                                         System.out.println("");
-                                                        System.out.println( "15. " + Menu.get(17));
+                                                        System.out.println("15. " + Menu.get(17));
                                                         System.out.println("===========================================================");
                                                         select = MyUtil.inputInteger("Please enter your choice: ", 1, 15);
                                                         switch (select) {
+                                                                // student
                                                                 case 1:
-                                                                        subjectList.createSubject();
-                                                                        subjectList.writeToFile();
-                                                                        break;
-                                                                case 2:
-
-                                                                        Subject x = subjectList.searchSubjectByID();
-                                                                        if (x == null) {
-                                                                                System.out.println("Wrong subject ID");
-                                                                        } else {
-
-                                                                                System.out.println(x.toString());
-                                                                        }
-                                                                        break;
-
-                                                                case 3:
-                                                                        if (!subjectList.updateSubject()) {
-                                                                                System.out.println("Subject not found!");
-                                                                        }
-                                                                        subjectList.writeToFile();
-                                                                        break;
-                                                                case 4:
-                                                                        if (!subjectList.deleteSubject()) {
-                                                                                System.out.println("Subject not found!");
-                                                                        }
-                                                                        subjectList.writeToFile();
-                                                                        break;
-                                                                case 5: {
-                                                                        subjectList.displaySubjectList();
-                                                                        break;
-                                                                }
-                                                                // bug
-                                                                case 6:
                                                                         studentList.createStudent();
                                                                         studentList.writeToFile();
                                                                         break;
-                                                                case 7: {
+                                                                case 2: {
                                                                         Student readInfor = studentList.readStudentInfor();
                                                                         if (readInfor == null) {
                                                                                 System.out.println("Wrong student ID");
@@ -145,13 +118,13 @@ public class Tester {
                                                                         break;
                                                                 }
 
-                                                                case 8: {
+                                                                case 3: {
                                                                         studentList.updateStudentInfor();
                                                                         studentList.writeToFile();
                                                                         break;
                                                                 }
 
-                                                                case 9: {
+                                                                case 4: {
                                                                         if (!studentList.deleteStudent()) {
                                                                                 System.out.println("Student not found!");
                                                                         }
@@ -159,8 +132,40 @@ public class Tester {
                                                                         break;
                                                                 }
 
-                                                                case 10: {
+                                                                case 5: {
                                                                         studentList.showStudentList();
+                                                                        break;
+                                                                }
+
+                                                                case 6:
+                                                                        subjectList.createSubject();
+                                                                        subjectList.writeToFile();
+                                                                        break;
+                                                                case 7:
+
+                                                                        Subject x = subjectList.searchSubjectByID();
+                                                                        if (x == null) {
+                                                                                System.out.println("Wrong subject ID");
+                                                                        } else {
+
+                                                                                System.out.println(x.toString());
+                                                                        }
+                                                                        break;
+
+                                                                case 8:
+                                                                        if (!subjectList.updateSubject()) {
+                                                                                System.out.println("Subject not found!");
+                                                                        }
+                                                                        subjectList.writeToFile();
+                                                                        break;
+                                                                case 9:
+                                                                        if (!subjectList.deleteSubject()) {
+                                                                                System.out.println("Subject not found!");
+                                                                        }
+                                                                        subjectList.writeToFile();
+                                                                        break;
+                                                                case 10: {
+                                                                        subjectList.displaySubjectList();
                                                                         break;
                                                                 }
 
@@ -209,6 +214,6 @@ public class Tester {
 
                         }
                 } while (choice != 3);
-                
+
         }
 }
