@@ -45,7 +45,7 @@ public class MyUtil {
                         System.out.println("Value can not be empty!");
                 } while (true);
         }
-        
+
         public static Double inputDouble(String message, int min, int max) {
                 Scanner sc = new Scanner(System.in);
                 do {
@@ -63,6 +63,12 @@ public class MyUtil {
         }
 
         //regex for username
+        public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[\\S]{3,20}$");
+
+        public static boolean validateUsername(String username) {
+                Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
+                return matcher.matches();
+        }
 
         // regex for email
         public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -80,7 +86,6 @@ public class MyUtil {
                 return matcher.matches();
         }
 
-        
         public static final Pattern VALID_STUDENTID_REGEX = Pattern.compile("SE\\d{6}");
 
         public static boolean validateID(String ID) {
@@ -91,8 +96,41 @@ public class MyUtil {
         public static final Pattern VALID_DOB_REGEX = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
 
         public static boolean validateDob(String dob) {
-                Matcher d = VALID_DOB_REGEX.matcher(dob);
-                return d.matches();
+                Matcher matcher = VALID_DOB_REGEX.matcher(dob);
+                if (!matcher.matches()) {
+                        return false;
+                }
+
+                String[] parts = dob.split("/");
+                int day = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int year = Integer.parseInt(parts[2]);
+
+                // Validate month
+                if (month < 1 || month > 12) {
+                        return false;
+                }
+
+                // Validate day based on month and year
+                int maxDays = getMaxDays(month, year);
+                if (day < 1 || day > maxDays) {
+                        return false;
+                }
+                return true;
+        }
+
+        private static boolean isLeapYear(int year) {
+                return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+        }
+
+        private static int getMaxDays(int month, int year) {
+                if (month == 2) {
+                        return isLeapYear(year) ? 29 : 28;
+                } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                        return 30;
+                } else {
+                        return 31;
+                }
         }
 
         public static final Pattern VALID_PHONE_REGEX = Pattern.compile("\\d{10}");

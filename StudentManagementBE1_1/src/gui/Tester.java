@@ -232,6 +232,7 @@ public class Tester {
                                         }
                                         break;
                                 case 2:
+                                       
                                         userList.register();
                                         userList.writeToFile();
                                         break;

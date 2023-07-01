@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.MyUtil;
+import static utils.MyUtil.validateUsername;
 
 /**
  *
@@ -83,25 +84,28 @@ public class UserList extends ArrayList<User> {
                         email = MyUtil.inputString("Enter your email: ");
                 } while (MyUtil.validateEmail(email) == false);
 
-                String username;
-                // check username is unique
                 boolean isUnique;
+                // ID
+                String username;
                 do {
                         isUnique = true;
-                        username = MyUtil.inputString("Enter your username: ");
-                        for (User user : this) {
-                                if (user.getUsername().equals(username)) {
+                        username = MyUtil.inputString("Enter username: ");
+                        for (User i : this) {
+
+                                if (i.getUsername().equals(username)) {
+                                        //System.out.println(x.toString());
                                         isUnique = false;
+
                                 }
                         }
                         if (isUnique == false) {
-                                System.out.println("This username is already existed!");
+                                System.out.println("This username is existed");
                         }
-                } while (isUnique == false);
+                } while (isUnique == false || MyUtil.validateUsername(username) == false);
 
                 // regex validate password 
                 String password;
-                 do {
+                do {
                         password = MyUtil.inputString("Enter your password: ");
                 } while (MyUtil.validatePass(password) == false);
 
