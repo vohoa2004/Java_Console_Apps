@@ -168,6 +168,7 @@ public class Tester {
                                                                         if (subjectList.searchSubject(id) == null) {
                                                                                 System.out.println("Not found this subject");
                                                                         } else {
+                                                                                // bug
                                                                                 boolean isLearn = false;
                                                                                 for (Student n : studentList) {
                                                                                         if (n.getSubjectIDs().contains(id)) {

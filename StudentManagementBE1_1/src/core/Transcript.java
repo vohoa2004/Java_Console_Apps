@@ -27,6 +27,8 @@ public class Transcript extends ArrayList<GradeItem> {
                                 System.out.println("Grade data file does not exist");
                                 System.exit(0);
                         }
+                        
+                        // studentID - (subjectID - (gradetype - grade) ) 
 
                         HashMap<String, HashMap<String, HashMap<String, Double>>> hashTranscript = new HashMap<>();
 
@@ -39,7 +41,11 @@ public class Transcript extends ArrayList<GradeItem> {
                                                         String[] split = thisLineTranscript.split(", "); // split when encountering a comma
                                                         String studentID = split[0].trim();
                                                         String subjectID = split[1].trim();
+                                             
+                                                        //Student Grades 
                                                         HashMap<String, HashMap<String, Double>> studentGrades = hashTranscript.getOrDefault(studentID, new HashMap<>());
+                                                        
+                                                        //Subject Grades for the previous student
                                                         HashMap<String, Double> subjectGrades = studentGrades.getOrDefault(subjectID, new HashMap<>());
 
                                                         for (int i = 2; i < split.length; i++) {
@@ -61,9 +67,13 @@ public class Transcript extends ArrayList<GradeItem> {
 
                         // Convert the hashTranscript to GradeItem objects and add them to the Transcript
                         for (String studentID : hashTranscript.keySet()) {
+                                // each studentGrades is a value of hashTranscript that has key is studentID
                                 HashMap<String, HashMap<String, Double>> studentGrades = hashTranscript.get(studentID);
                                 for (String subjectID : studentGrades.keySet()) {
+                                        // each subjectgrade is a value of studentGrade that has key is subjectID 
                                         HashMap<String, Double> subjectGrades = studentGrades.get(subjectID);
+                                        
+                                        // lay diem tu subjectGrades vao tung cot
                                         double labGrade = subjectGrades.getOrDefault("labGrade", 0.0);
                                         double progressTestGrade = subjectGrades.getOrDefault("progressTestGrade", 0.0);
                                         double finalTestGrade = subjectGrades.getOrDefault("finalTestGrade", 0.0);
@@ -98,7 +108,6 @@ public class Transcript extends ArrayList<GradeItem> {
         }
 
         public ArrayList<String> printUngradedSubjects(String studentID, StudentList studentList) {
-
                 boolean found = false;
                 HashSet<String> gradedSubjects = new HashSet<>();
                 ArrayList<String> subjectIds = new ArrayList<>();
@@ -110,7 +119,6 @@ public class Transcript extends ArrayList<GradeItem> {
                         }
                         for (String subjectID : studentList.searchStudent(studentID).getSubjectIDs()) {
                                 if (!gradedSubjects.contains(subjectID)) {
-
                                         found = true;
                                         subjectIds.add(subjectID);
                                 }
@@ -229,7 +237,6 @@ public class Transcript extends ArrayList<GradeItem> {
         public void sortByGrade(ArrayList<GradeItem> x) {
                 // tao object com de so sanh
                 Comparator com = new Comparator<GradeItem>() {
-
                         @Override
                         public int compare(GradeItem o2, GradeItem o1) {
                                 if (o1.getAverageGrade() > o2.getAverageGrade()) {

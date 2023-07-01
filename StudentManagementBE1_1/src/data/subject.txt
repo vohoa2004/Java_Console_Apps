@@ -1,9 +1,10 @@
 subject ID, Subject Name, Credit
-PRO192, Java, 3
+PRO192, Java OOP, 3
 CSI104, Introduction to Computer Science, 3
 MAD101, Discrete Mathematics, 3
 PRF192, Programming C, 3
-OSG202, Operating System, 3
+OSG202, He dieu hanh, 3
 SSG104, Teamwork, 3
 NWC203c, Net Working Coursera, 3
 MAE101, Toan Cho Nganh Ky Thuat, 3
+CEA201, To Chuc va Kien Truc May Tinh, 3

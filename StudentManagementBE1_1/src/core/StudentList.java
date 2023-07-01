@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.MyUtil;
 import core.SubjectList;
+import java.util.List;
 
 public class StudentList extends ArrayList<Student> {
 
@@ -230,13 +231,12 @@ public class StudentList extends ArrayList<Student> {
                 String id = MyUtil.inputString("Enter ID of the student you want to delete: ");
                 for (Student x : this) {
                         if (x.getStudentID().equals(id)) {
-                                if (x.getSubjectIDs().size() == 0) {
+                                List<String> subjectIDs = x.getSubjectIDs();
+                                if (subjectIDs == null || subjectIDs.isEmpty()) {
                                         this.remove(x);
                                         System.out.println("Student deleted successfully");
-                                        
-                                }
-                                else {
-                                        System.out.println("Cannot delete because this student has learnt some subjects");
+                                } else {
+                                        System.out.println("Cannot delete because this student has learned some subjects");
                                 }
                                 return true;
                         }
@@ -279,7 +279,7 @@ public class StudentList extends ArrayList<Student> {
                                 System.out.println("This student joined the subject!");
                         }
                 } else {
-                        System.out.println("Student ID or subject not found!");
+                        System.out.println("Student ID or subject ID not found!");
                 }
         }
 
