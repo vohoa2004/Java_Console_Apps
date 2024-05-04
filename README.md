@@ -1,2 +1,2 @@
 # Java_Console_Apps
-This repositories contains some console apps that I made when I got started with Java.
+This is a console app that we made when we got started with Java.
